@@ -41,6 +41,9 @@ def main_loop():
         pygame.display.flip()
 
 
+# Main windows settings
+main_settings()
+
 # Using the loop for the game
 main_loop()
 
