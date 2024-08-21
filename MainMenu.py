@@ -8,20 +8,22 @@
 from Dependencies import *
 
 pygame.init()
-# Set up the window dimensions
-window_width = 800
-window_height = 600
+def main_settings():
+    global screen
+    # Set up the window dimensions
+    window_width = 800
+    window_height = 600
 
-# Create the screen object
-screen = pygame.display.set_mode((window_width, window_height))
+    # Create the screen object
+    screen = pygame.display.set_mode((window_width, window_height))
 
-# Set the title of the window
-pygame.display.set_caption("Pac Man by Christophe & Zachary")
+    # Set the title of the window
+    pygame.display.set_caption("Pac Man by Christophe & Zachary")
 
-# Set the icon of the window
-gameicon = pygame.image.load('Assets/Icon.png')
+    # Set the icon of the window
+    gameicon = pygame.image.load('Assets/Icon.png')
 
-pygame.display.set_icon(gameicon)
+    pygame.display.set_icon(gameicon)
 
 # Main loop
 def main_loop():
