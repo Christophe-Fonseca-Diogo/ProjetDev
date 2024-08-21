@@ -2,7 +2,7 @@
 
 ### Objectif ###
 
-Il s'agit de refaire le jeux PAC-MAN
+Il s'agit de refaire le jeux PAC-MAN.\
 Ce développement aura lieu pendant ma formation de CFC informaticien.\
 Version : \
 20.8.2024 : Ouverture du dépôt
