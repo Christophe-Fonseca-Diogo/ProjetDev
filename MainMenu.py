@@ -55,14 +55,27 @@ def texts_main_menu():
 def button_play():
 
     # Draw button
-    button_font = pygame.font.Font('Assets/PAC-FONT.TTF', 40)
-    button_text = button_font.render('Start', True, black)
-    button_rect = button_text.get_rect()
-    button_rect.center = (window_width // 2, window_height // 2)
+    button_play_font = pygame.font.Font('Assets/PAC-FONT.TTF', 40)
+    button_play_text = button_play_font.render('Start', True, black)
+    button_play_rect = button_play_text.get_rect()
+    button_play_rect.center = (window_width // 2, window_height // 2.5)
 
-    pygame.draw.rect(screen, yellow, button_rect)  # Draw background
-    screen.blit(button_text, button_rect)  # Draw button text
-    return button_rect  # Return the button rectangle for event handling
+    pygame.draw.rect(screen, yellow, button_play_rect)  # Draw background
+    screen.blit(button_play_text, button_play_rect)  # Draw button text
+    return button_play_rect  # Return the button rectangle for event handling
+
+
+def button_exit():
+
+    # Draw button
+    button_exit_font = pygame.font.Font('Assets/PAC-FONT.TTF', 40)
+    button_exit_text = button_exit_font.render('Exit', True, black)
+    button_exit_rect = button_exit_text.get_rect()
+    button_exit_rect.center = (window_width // 2, window_height // 1.5)
+
+    pygame.draw.rect(screen, red, button_exit_rect)  # Draw background
+    screen.blit(button_exit_text, button_exit_rect)  # Draw button text
+    return button_exit_rect  # Return the button rectangle for event handling
 
 
 def button_event_game(button_rect):
@@ -72,6 +85,14 @@ def button_event_game(button_rect):
                 if button_rect.collidepoint(event.pos):
                     from Game import game_loop
                     game_loop()
+
+
+def button_event_quit(button_exit_rect):
+    for event in pygame.event.get():
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:  # Left mouse button
+                if button_exit_rect.collidepoint(event.pos):
+                    exit()
 
 
 # Main loop
@@ -84,11 +105,12 @@ def main_loop():
             if event.type == pygame.QUIT:
                 running = False
         button_rect = button_play()
+        button_exit_rect = button_exit()
         # display the text
         texts_main_menu()
         #
         button_event_game(button_rect)
-
+        button_event_quit(button_exit_rect)
         # Update the display
         pygame.display.flip()
 
