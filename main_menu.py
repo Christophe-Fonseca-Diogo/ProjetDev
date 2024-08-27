@@ -6,8 +6,8 @@
 ###
 import pygame.display
 
-from Dependencies import *
-from Game import game_loop
+from dependencies import *
+from game import game_loop
 
 def main_settings():
     pygame.init()

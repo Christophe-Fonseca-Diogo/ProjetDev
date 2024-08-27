@@ -5,7 +5,7 @@
 # SI-C3A
 ###
 
-from Dependencies import *
+from dependencies import *
 
 
 def game_settings():
