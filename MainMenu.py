@@ -96,7 +96,6 @@ def button_event_quit(button_exit_rect):
                 if button_exit_rect.collidepoint(event.pos):
                     exit()
 
-
 # Main loop
 def main_loop():
     running = True
