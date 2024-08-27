@@ -1,4 +1,9 @@
-
+###
+# This file is for the game
+# Last Edited :
+# Made by Christophe & Zachary
+# SI-C3A
+###
 
 from Dependencies import *
 
@@ -23,18 +28,20 @@ def game_settings():
 
 
 def game_loop():
-    running = True
-    while running:
-        # Handle events
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
+        running = True
+        while running:
+            # Handle events
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
 
 
-# Main windows settings
-game_settings()
 
-# Using the loop for the game
-game_loop()
+if __name__=="__main__":
+    # Main windows settings
+    game_settings()
 
-pygame.quit()
+    # Using the loop for the game
+    game_loop()
+
+    pygame.quit()

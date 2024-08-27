@@ -4,9 +4,10 @@
 # Made by Christophe & Zachary
 # SI-C3A
 ###
+import pygame.display
 
 from Dependencies import *
-
+from Game import game_loop
 
 def main_settings():
     pygame.init()
@@ -26,7 +27,7 @@ def main_settings():
     game_icon = pygame.image.load('Assets/Icon.png')
 
     pygame.display.set_icon(game_icon)
-
+    pygame.display.update()
 
 def texts_main_menu():
 
@@ -42,7 +43,7 @@ def texts_main_menu():
 
     # copyrights settings
     copyrights_font = pygame.font.Font('Assets/PAC-FONT.TTF', 25)
-    copyrights_text = copyrights_font.render('1 Made by Christophe and Zachary 9', True, red, (0, 0, 0))
+    copyrights_text = copyrights_font.render('1 00000000000000000000000000000000000000000000000000000000000000000 9', True, red, (0, 0, 0))
     copyrights_text_rect = copyrights_text.get_rect()
 
     # set the center of the rectangular object.
@@ -51,12 +52,14 @@ def texts_main_menu():
     # show in the screen
     screen.blit(copyrights_text, copyrights_text_rect)
 
+    pygame.display.update()
+
 
 def button_play():
 
     # Draw button
-    button_play_font = pygame.font.Font('Assets/PAC-FONT.TTF', 40)
-    button_play_text = button_play_font.render('Start', True, black)
+    button_play_font = pygame.font.Font('Assets/2FONT.ttf', 40)
+    button_play_text = button_play_font.render('‎ ‎ ‎ START ‎ ‎ ‎', True, black)
     button_play_rect = button_play_text.get_rect()
     button_play_rect.center = (window_width // 2, window_height // 2.5)
 
@@ -65,26 +68,25 @@ def button_play():
     return button_play_rect  # Return the button rectangle for event handling
 
 
+def button_event_game(button_play_rect):
+    for event in pygame.event.get():
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:  # Left mouse button
+                if button_play_rect.collidepoint(event.pos):
+                    game_loop()
+
+
 def button_exit():
 
     # Draw button
-    button_exit_font = pygame.font.Font('Assets/PAC-FONT.TTF', 40)
-    button_exit_text = button_exit_font.render('Exit', True, black)
+    button_exit_font = pygame.font.Font('Assets/2FONT.ttf', 40)
+    button_exit_text = button_exit_font.render('‎ EXIT ‎', True, black)
     button_exit_rect = button_exit_text.get_rect()
     button_exit_rect.center = (window_width // 2, window_height // 1.5)
 
     pygame.draw.rect(screen, red, button_exit_rect)  # Draw background
     screen.blit(button_exit_text, button_exit_rect)  # Draw button text
     return button_exit_rect  # Return the button rectangle for event handling
-
-
-def button_event_game(button_rect):
-    for event in pygame.event.get():
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1:  # Left mouse button
-                if button_rect.collidepoint(event.pos):
-                    from Game import game_loop
-                    game_loop()
 
 
 def button_event_quit(button_exit_rect):
@@ -104,21 +106,20 @@ def main_loop():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-        button_rect = button_play()
+
+        # Draw buttons and handle events
+        button_play_rect = button_play()
         button_exit_rect = button_exit()
-        # display the text
+        # Display the main menu texts
         texts_main_menu()
-        #
-        button_event_game(button_rect)
-        button_event_quit(button_exit_rect)
-        # Update the display
-        pygame.display.flip()
 
 
-# Main windows settings
-main_settings()
+ #       button_event_game(button_play_rect)
+        button_event_quit(button_exit_rect)  # Handle exit event
 
-# Using the loop for the menu
-main_loop()
+if __name__=="__main__":
+    # Main windows settings
+    main_settings()
 
-pygame.quit()
+    # Using the loop for the menu
+    main_loop()
