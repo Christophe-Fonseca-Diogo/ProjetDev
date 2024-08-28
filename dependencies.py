@@ -7,6 +7,7 @@
 
 
 import pygame.font
+import pygame.display
 
 pygame.font.init()
 

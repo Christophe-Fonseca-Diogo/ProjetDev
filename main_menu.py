@@ -5,7 +5,7 @@
 # SI-C3A
 ###
 
-import pygame.display
+
 from dependencies import *
 from game import game_loop, game_settings
 from scoreboard import scoreboard_loop, scoreboard_settings
