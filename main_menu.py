@@ -27,7 +27,7 @@ def main_settings():
     pygame.display.set_caption("Pac Man by Christophe & Zachary")
 
     # Set the icon of the window
-    game_icon = pygame.image.load('Assets/Icon.png')
+    game_icon = pygame.image.load('Icons/Icon_Pac.png')
 
     pygame.display.set_icon(game_icon)
     pygame.display.update()

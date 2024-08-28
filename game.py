@@ -23,7 +23,7 @@ def game_settings():
     pygame.display.set_caption("GAME PAC-MAN")
 
     # Set the icon of the window
-    game_icon = pygame.image.load('Assets/Icon.png')
+    game_icon = pygame.image.load('Icons/Joystick.png')
 
     pygame.display.set_icon(game_icon)
 

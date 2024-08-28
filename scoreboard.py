@@ -23,7 +23,7 @@ def scoreboard_settings():
     pygame.display.set_caption("Scoreboard PAC-MAN")
 
     # Set the icon of the window
-    game_icon = pygame.image.load('Assets/Icon.png')
+    game_icon = pygame.image.load('Icons/Trophy.png')
 
     pygame.display.set_icon(game_icon)
 
