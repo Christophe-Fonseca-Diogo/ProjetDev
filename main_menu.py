@@ -1,14 +1,17 @@
 ###
 # This file is for the Main Menu of our game : Pac-Man
-# Last Edited :
+# Last Edited : 28.08.2024
 # Made by Christophe & Zachary
 # SI-C3A
 ###
+
 import pygame.display
-
 from dependencies import *
-from game import game_loop
+from game import game_loop, game_settings
+from scoreboard import scoreboard_loop, scoreboard_settings
 
+
+# Settings for the window
 def main_settings():
     pygame.init()
     pygame.font.init()
@@ -29,6 +32,8 @@ def main_settings():
     pygame.display.set_icon(game_icon)
     pygame.display.update()
 
+
+# Main Text for the title
 def texts_main_menu():
 
     # Title settings
@@ -55,6 +60,7 @@ def texts_main_menu():
     pygame.display.update()
 
 
+# Button settings for starting the game
 def button_play():
 
     # Draw button
@@ -63,19 +69,15 @@ def button_play():
     button_play_rect = button_play_text.get_rect()
     button_play_rect.center = (window_width // 2, window_height // 2.5)
 
-    pygame.draw.rect(screen, yellow, button_play_rect)  # Draw background
-    screen.blit(button_play_text, button_play_rect)  # Draw button text
-    return button_play_rect  # Return the button rectangle for event handling
+    # Background of the rectangle
+    pygame.draw.rect(screen, yellow, button_play_rect)
+    # Text in the rectangle
+    screen.blit(button_play_text, button_play_rect)
+    # Event handling
+    return button_play_rect
 
 
-def button_event_game(button_play_rect):
-    for event in pygame.event.get():
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1:  # Left mouse button
-                if button_play_rect.collidepoint(event.pos):
-                    game_loop()
-
-
+# Button settings for leaving the game
 def button_exit():
 
     # Draw button
@@ -84,39 +86,76 @@ def button_exit():
     button_exit_rect = button_exit_text.get_rect()
     button_exit_rect.center = (window_width // 2, window_height // 1.5)
 
-    pygame.draw.rect(screen, red, button_exit_rect)  # Draw background
-    screen.blit(button_exit_text, button_exit_rect)  # Draw button text
-    return button_exit_rect  # Return the button rectangle for event handling
+    # Background of the rectangle
+    pygame.draw.rect(screen, red, button_exit_rect)
+    # Text in the rectangle
+    screen.blit(button_exit_text, button_exit_rect)
+    # Event handling
+    return button_exit_rect
 
 
-def button_event_quit(button_exit_rect):
-    for event in pygame.event.get():
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1:  # Left mouse button
-                if button_exit_rect.collidepoint(event.pos):
-                    exit()
+# Button settings for leaving the game
+def button_scoreboard():
 
-# Main loop
+    # Draw button
+    button_scoreboard_font = pygame.font.Font('Assets/2FONT.ttf', 40)
+    button_scoreboard_text = button_scoreboard_font.render('‎ SCOREBOARD ‎', True, black)
+    button_scoreboard_rect = button_scoreboard_text.get_rect()
+    button_scoreboard_rect.center = (window_width // 2, window_height // 1.9)
+
+    # Background of the rectangle
+    pygame.draw.rect(screen, blue, button_scoreboard_rect)
+    # Text in the rectangle
+    screen.blit(button_scoreboard_text, button_scoreboard_rect)
+    # Event handling
+    return button_scoreboard_rect
+
+
+# Main loop for the menu
 def main_loop():
     running = True
-
+    texts_main_menu()
+    button_play_rect = button_play()
+    button_exit_rect = button_exit()
+    button_scoreboard_rect = button_scoreboard()
     while running:
         # Handle events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                pygame.quit()
+                exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:  # Left mouse button
 
-        # Draw buttons and handle events
-        button_play_rect = button_play()
-        button_exit_rect = button_exit()
-        # Display the main menu texts
-        texts_main_menu()
+                    if button_play_rect.collidepoint(event.pos):
+                        # Quit the menu
+                        pygame.quit()
+                        # Settings for the game
+                        game_settings()
+                        # Game function
+                        game_loop()
+                        # Stop the loop of the menu
+                        running = False
+
+                    if button_exit_rect.collidepoint(event.pos):
+                        pygame.quit()
+                        exit()
+
+                    if button_scoreboard_rect.collidepoint(event.pos):
+                        # Quit the menu
+                        pygame.quit()
+                        # Settings for the game
+                        scoreboard_settings()
+                        # Game function
+                        scoreboard_loop()
+                        # Stop the loop of the menu
+                        running = False
+
+        # Update the screen
+        pygame.display.update()
 
 
- #       button_event_game(button_play_rect)
-        button_event_quit(button_exit_rect)  # Handle exit event
-
-if __name__=="__main__":
+if __name__ == "__main__":
     # Main windows settings
     main_settings()
 

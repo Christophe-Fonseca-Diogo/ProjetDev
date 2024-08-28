@@ -8,8 +8,8 @@
 from dependencies import *
 
 
-# Window settings for the game
-def game_settings():
+# Window settings for the scoreboard
+def scoreboard_settings():
     pygame.init()
     global screen, window_width, window_height
     # Set up the window dimensions
@@ -20,7 +20,7 @@ def game_settings():
     screen = pygame.display.set_mode((window_width, window_height))
 
     # Set the title of the window
-    pygame.display.set_caption("GAME PAC-MAN")
+    pygame.display.set_caption("Scoreboard PAC-MAN")
 
     # Set the icon of the window
     game_icon = pygame.image.load('Assets/Icon.png')
@@ -28,8 +28,8 @@ def game_settings():
     pygame.display.set_icon(game_icon)
 
 
-# Loop for the game
-def game_loop():
+# Loop for the scoreboard
+def scoreboard_loop():
     running = True
     while running:
         # Handle events
@@ -40,7 +40,7 @@ def game_loop():
 
 if __name__ == "__main__":
     # Main windows settings
-    game_settings()
+    scoreboard_settings()
 
-    # Using the loop for the game
-    game_loop()
+    # Using the loop for the scoreboard
+    scoreboard_loop()

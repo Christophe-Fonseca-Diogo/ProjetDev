@@ -1,6 +1,6 @@
 ###
-# This file is for all the dependencies for Pac Man
-# Last Edited :
+# This file is for all the dependencies for Pac-Man
+# Last Edited : 28.08.2024
 # Made by Christophe & Zachary
 # SI-C3A
 ###
