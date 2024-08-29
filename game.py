@@ -14,7 +14,7 @@ def game_settings():
     global screen, window_width, window_height
     # Set up the window dimensions
     window_width = 800
-    window_height = 200
+    window_height = 800
 
     # Create the screen object
     screen = pygame.display.set_mode((window_width, window_height))
