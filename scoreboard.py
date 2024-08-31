@@ -37,7 +37,7 @@ def title_scoreboard():
     title_text_rect = title_text.get_rect()
 
     # set the center of the rectangular object.
-    title_text_rect.center = (window_width // 2, window_height // 10)
+    title_text_rect.center = (window_width // 2, window_height // 9)
     # show in the screen
     screen.blit(title_text, title_text_rect)
 
@@ -45,29 +45,57 @@ def title_scoreboard():
 
 
 def rectangle():
-    rect_x = (window_width // 2) - (window_height // 2)  # Center horizontally
-    rect_y = (window_height // 10) - (window_height // 2)  # Set vertically with a slight
+    # Define rectangle properties
+    rect_width = 300
+    rect_height = 400
+    rect_x = (window_width // 2) - (rect_width // 2)  # Center horizontally
+    rect_y = (window_height // 2) - (rect_height // 2)  # Center vertically
+    rectangle_color = blue
+    pygame.draw.rect(screen, rectangle_color, (rect_x, rect_y, rect_width, rect_height), border_radius=50)
+    # Update the screen
+    pygame.display.update()
 
-    color = blue
 
-    # Drawing Rectangle
-    pygame.draw.rect(screen, color, pygame.Rect(30,30,30,30))
-    pygame.display.flip()
+def button_back():
+
+    # Draw button
+    button_back_font = pygame.font.Font('Assets/2FONT.ttf', 40)
+    button_back_text = button_back_font.render('‎ BACK ‎', True, black)
+    button_back_rect = button_back_text.get_rect()
+    button_back_rect.center = (window_width // 2, window_height // 1.1)
+
+    # Background of the rectangle
+    pygame.draw.rect(screen, red, button_back_rect)
+    # Text in the rectangle
+    screen.blit(button_back_text, button_back_rect)
+    # Event handling
+    return button_back_rect
 
 
 # Loop for the scoreboard
 def scoreboard_loop():
     running = True
+    button_back_rect = button_back()
     title_scoreboard()
     rectangle()
+
+    # Update the screen immediately after drawing the necessary elements
+    pygame.display.update()
+
     while running:
         # Handle events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                pygame.quit()
+                exit()
 
-    # Update the screen
-    pygame.display.update()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:  # Left mouse button
+                    if button_back_rect.collidepoint(event.pos):
+                        running = False  # Exit the scoreboard loop
+
+        # Update the screen inside the loop
+        pygame.display.update()
 
 
 if __name__ == "__main__":

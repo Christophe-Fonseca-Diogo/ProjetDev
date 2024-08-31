@@ -8,7 +8,7 @@
 
 from dependencies import *
 from game import game_loop, game_settings
-from scoreboard import scoreboard_loop, scoreboard_settings
+from scoreboard import scoreboard_loop, scoreboard_settings, button_back
 
 
 # Settings for the window
@@ -142,13 +142,15 @@ def main_loop():
                         exit()
 
                     if button_scoreboard_rect.collidepoint(event.pos):
-                        # Quit the menu
-                        pygame.quit()
                         # Settings for the game
                         scoreboard_settings()
                         # Game function
                         scoreboard_loop()
-                        # Stop the loop of the menu
+                        running = False
+
+                    if button_back():
+                        main_settings()
+                        main_loop()
                         running = False
 
         # Update the screen
