@@ -1,5 +1,6 @@
 # PAC-MAN Projet Dev
-
+---
+![img_5.png](img_5.png)
 ### Objectif ###
 
 Il s'agit de refaire le jeux PAC-MAN.\
@@ -12,11 +13,14 @@ Version : \
 Il s'agit d'une application en python réalisée avec pygame. Aucune configuration spécifique n'est requise.\
 Il conviendra cependant d'installer le package mysql-connector-python pour l'interaction avec la BD.
 
+### Comment jouer
+- Il faut avoir pygame d'installer
+- Il faut lancer le fichier main_menu.py
+--- 
 ![image](https://github.com/user-attachments/assets/24ae78c2-05ae-4cef-969d-6ef4dd2a9fc3)
 
 
-### How to play the game
+![img_4.png](img_4.png)
 
-- First you need to have pygame installed.
-- After that just launch the main_menu.py
+
 
