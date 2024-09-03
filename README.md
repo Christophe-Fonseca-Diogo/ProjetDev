@@ -18,7 +18,7 @@ Il conviendra cependant d'installer le package `mysql-connector-python` pour l'i
 - Il faut avoir pygame d'installer
 - Il faut lancer le fichier `main_menu.py`
   
-![image](https://github.com/user-attachments/assets/24ae78c2-05ae-4cef-969d-6ef4dd2a9fc3)
+
 ---
 ![image](https://github.com/user-attachments/assets/673568c7-7808-42b5-a680-8803fdebfbb3)
 
@@ -39,5 +39,5 @@ However, you will need to install the `mysql-connector-python` package for inter
 - Pygame must be installed.
 - Run the `main_menu.py` file.
 
-
+![image](https://github.com/user-attachments/assets/24ae78c2-05ae-4cef-969d-6ef4dd2a9fc3)
 
