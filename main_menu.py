@@ -12,6 +12,7 @@ from scoreboard import scoreboard_loop, scoreboard_settings, button_back
 
 Screen = "Main"
 
+
 # Settings for the window
 def main_settings():
     pygame.init()
