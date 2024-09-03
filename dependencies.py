@@ -8,8 +8,10 @@
 
 import pygame.font
 import pygame.display
-
+import pygame.image
+import sys
 pygame.font.init()
+from tkinter import messagebox
 
 red = (255, 0, 0)
 orange = (255, 165, 0)

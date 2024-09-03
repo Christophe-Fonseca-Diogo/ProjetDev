@@ -4,12 +4,12 @@
 # Made by Christophe & Zachary
 # SI-C3A
 ###
-
+import player
 from dependencies import *
-
 
 # Window settings for the game
 def game_settings():
+    global player_images, character
     pygame.init()
     global screen, window_width, window_height
     # Set up the window dimensions
@@ -26,6 +26,8 @@ def game_settings():
     game_icon = pygame.image.load('Icons/Joystick.png')
 
     pygame.display.set_icon(game_icon)
+    player_images = player.load_player_images()
+    character = player.draw_player(screen, player_images, window_width, window_height, 0)
 
 
 # Loop for the game
@@ -36,6 +38,7 @@ def game_loop():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+        pygame.display.update()
 
 
 if __name__ == "__main__":
