@@ -6,7 +6,7 @@
 
 Il s'agit de refaire le jeux PAC-MAN.\
 Ce développement aura lieu pendant ma formation de CFC informaticien.\
-Version : 0.5
+Version : 0.5 \
 20.8.2024 : Ouverture du dépôt
 
 ### Comment configurer ma machine pour que le programme fonctionne? ###
@@ -26,7 +26,7 @@ Il conviendra cependant d'installer le package `mysql-connector-python` pour l'i
  
 The goal is to recreate the PAC-MAN game.  
 This development will take place during my CFC IT diploma.  
-Version: 0.5
+Version: 0.5\
 08/20/2024: Repository opening
  
 ### How to configure my machine for the game to work? ###
