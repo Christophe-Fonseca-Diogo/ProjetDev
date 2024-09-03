@@ -1,6 +1,6 @@
 # PAC-MAN Projet Dev
 ---
-![img_5.png](img_5.png)
+
 ### Objectif ###
 
 Il s'agit de refaire le jeux PAC-MAN.\
@@ -19,8 +19,22 @@ Il conviendra cependant d'installer le package mysql-connector-python pour l'int
 --- 
 ![image](https://github.com/user-attachments/assets/24ae78c2-05ae-4cef-969d-6ef4dd2a9fc3)
 
-
-![img_4.png](img_4.png)
+### Objective ###
+ 
+The goal is to recreate the PAC-MAN game.  
+This development will take place during my CFC IT diploma.  
+Version:  
+08/20/2024: Repository opening
+ 
+### How to configure my machine for the game to work? ###
+ 
+This is a Python application made with Pygame. No specific configuration is required.  
+However, you will need to install the `mysql-connector-python` package for interaction with the database.
+ 
+### How to play ###
+ 
+- Pygame must be installed.
+- Run the `main_menu.py` file.
 
 
 
