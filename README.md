@@ -15,4 +15,8 @@ Il conviendra cependant d'installer le package mysql-connector-python pour l'int
 ![image](https://github.com/user-attachments/assets/24ae78c2-05ae-4cef-969d-6ef4dd2a9fc3)
 
 
+### How to play the game
+
+- First you need to have pygame installed.
+- After that just launch the main_menu.py
 
