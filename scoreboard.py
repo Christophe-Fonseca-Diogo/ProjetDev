@@ -44,6 +44,7 @@ def title_scoreboard():
     pygame.display.update()
 
 
+# Blue rectangle for the scoreboard
 def rectangle():
     # Define rectangle properties
     rect_width = 300
@@ -56,6 +57,7 @@ def rectangle():
     pygame.display.update()
 
 
+# Button for going back in the menu
 def button_back():
 
     # Draw button

@@ -4,8 +4,10 @@
 # Made by Christophe & Zachary
 # SI-C3A
 ###
+
 import player
 from dependencies import *
+
 
 # Window settings for the game
 def game_settings():
