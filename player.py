@@ -8,11 +8,14 @@
 import pygame
 
 
-def load_player_images():
+def load_player_images(width, height):
     player_images = []
     for i in range(1, 4):
+        # Load the image
         image = pygame.image.load(f'Assets/Player_Model/Player_{i}.png')
-        player_images.append(image)
+        # Scale the image
+        scaled_image = pygame.transform.scale(image, (width, height))
+        player_images.append(scaled_image)
     return player_images
 
 

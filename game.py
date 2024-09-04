@@ -28,7 +28,7 @@ def game_settings():
     game_icon = pygame.image.load('Icons/Joystick.png')
 
     pygame.display.set_icon(game_icon)
-    player_images = player.load_player_images()
+    player_images = player.load_player_images(100, 100)
     character = player.draw_player(screen, player_images, window_width, window_height, 0)
 
 
