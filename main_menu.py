@@ -1,6 +1,6 @@
 ###
 # This file is for the Main Menu of our game : Pac-Man
-# Last Edited : 28.08.2024
+# Last Edited : 06.09.2024
 # Made by Christophe & Zachary
 # SI-C3A
 ###
@@ -146,10 +146,10 @@ def main_loop():
 
                     if button_scoreboard_rect.collidepoint(event.pos):
                         Screen = "Scoreboard"
-                        # Settings for the game
+                        # Settings for the scoreboard
                         scoreboard_settings()
-                        # Game function
                         scoreboard_loop()
+                        # Stop the loop of the menu
                         running = False
 
                     if Screen == "Scoreboard":
