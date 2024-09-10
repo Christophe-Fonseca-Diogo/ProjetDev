@@ -41,6 +41,7 @@ def game_settings():
 # Loop for the game
 def game_loop():
     running = True
+    # Background music for the game
     game_music()
     while running:
         # Handle events
@@ -53,6 +54,5 @@ def game_loop():
 if __name__ == "__main__":
     # Main windows settings
     game_settings()
-
     # Using the loop for the game
     game_loop()

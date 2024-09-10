@@ -127,7 +127,6 @@ def main_loop():
     button_play_rect = button_play()
     button_exit_rect = button_exit()
     button_scoreboard_rect = button_scoreboard()
-    menu_music()
     while running:
         # Handle events
         for event in pygame.event.get():
@@ -173,6 +172,7 @@ def main_loop():
 if __name__ == "__main__":
     # Main windows settings
     main_settings()
-
+    # Background music for the menu
+    menu_music()
     # Using the loop for the menu
     main_loop()
