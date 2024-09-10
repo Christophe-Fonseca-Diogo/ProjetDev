@@ -5,7 +5,6 @@
 # SI-C3A
 ###
 import pygame.mixer
-
 from dependencies import *
 from game import game_loop, game_settings
 from scoreboard import scoreboard_loop, scoreboard_settings, button_back
@@ -14,10 +13,9 @@ Screen = "Main"
 # Music for the menu
 def menu_music():
     pygame.mixer.init()
-    music = pygame.mixer.Sound("Assets/Sounds/Main_Menu.mp3")
+    music = pygame.mixer.Sound("Assets/Sounds/Menu.mp3")
     # -1 for infinite loop
     music.play(loops=-1)
-
 
 # Settings for the window
 def main_settings():
