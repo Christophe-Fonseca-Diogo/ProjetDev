@@ -8,6 +8,12 @@
 import player
 from dependencies import *
 
+# Music for the game
+def game_music():
+    pygame.mixer.init()
+    music = pygame.mixer.Sound("Assets/Sounds/Game.mp3")
+    # -1 for infinite loop
+    music.play(loops=-1)
 
 # Window settings for the game
 def game_settings():
@@ -35,6 +41,7 @@ def game_settings():
 # Loop for the game
 def game_loop():
     running = True
+    game_music()
     while running:
         # Handle events
         for event in pygame.event.get():

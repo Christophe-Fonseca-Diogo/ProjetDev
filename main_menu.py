@@ -4,13 +4,19 @@
 # Made by Christophe & Zachary
 # SI-C3A
 ###
-
+import pygame.mixer
 
 from dependencies import *
 from game import game_loop, game_settings
 from scoreboard import scoreboard_loop, scoreboard_settings, button_back
 
 Screen = "Main"
+# Music for the menu
+def menu_music():
+    pygame.mixer.init()
+    music = pygame.mixer.Sound("Assets/Sounds/Main_Menu.mp3")
+    # -1 for infinite loop
+    music.play(loops=-1)
 
 
 # Settings for the window
@@ -121,6 +127,7 @@ def main_loop():
     button_play_rect = button_play()
     button_exit_rect = button_exit()
     button_scoreboard_rect = button_scoreboard()
+    menu_music()
     while running:
         # Handle events
         for event in pygame.event.get():
