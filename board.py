@@ -35,7 +35,7 @@ board = [
 def draw_board(screen):
     case_size = 45
     widht = (800 - (len(board[0]) * case_size)) // 2
-    height = (800 - (len(board) * case_size)) // 2
+    height = (950 - (len(board) * case_size)) // 2
 
     # Load and scale veggies images
     carrot_image = pygame.image.load('Assets/Veggies/carrot.png')

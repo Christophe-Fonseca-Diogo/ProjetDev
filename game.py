@@ -17,6 +17,17 @@ def game_music():
     # -1 for infinite loop
     music.play(loops=-1)
 
+def game_title():
+    # Title settings
+    title_font = pygame.font.Font('Assets/PAC-FONT.TTF', 80)
+    title_text = title_font.render('PAC-MAN', True, yellow, (0, 0, 0))
+    title_text_rect = title_text.get_rect()
+
+    # set the center of the rectangular object.
+    title_text_rect.center = (window_width // 2, window_height // 12)
+    # show in the screen
+    screen.blit(title_text, title_text_rect)
+
 # Window settings for the game
 def game_settings():
     global player_images, character
@@ -24,7 +35,7 @@ def game_settings():
     global screen, window_width, window_height
     # Set up the window dimensions
     window_width = 800
-    window_height = 800
+    window_height = 900
 
     # Create the screen object
     screen = pygame.display.set_mode((window_width, window_height))
@@ -45,12 +56,12 @@ def game_loop():
     running = True
     # Background music for the game
     game_music()
+    game_title()
     while running:
         # Handle events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-        # Draw the board on the screen
         draw_board(screen)
         pygame.display.update()
 
