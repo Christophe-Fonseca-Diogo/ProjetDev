@@ -16,8 +16,8 @@ pygame.init()
 #6-9 Ghosts
 board = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1],
-    [1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1],
+    [1, 2, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 3, 1],
+    [1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1],
     [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
     [1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1],
     [1, 0, 1, 0, 0, 6, 1, 1, 1, 1, 7, 0, 0, 1, 0, 1],
@@ -72,12 +72,13 @@ def draw_board(screen):
     # Draw the maze on the screen
     for row in range(len(board)):
         for col in range(len(board[row])):
-            if board[row][col] == 1:  # Wall
+            # Draw the wall
+            if board[row][col] == 1:
                 pygame.draw.rect(screen, blue,
                                  (widht + col * case_size, height + row * case_size,
                                   case_size, case_size))
-            elif board[row][col] == 0:  # Path
-                # Draw the black rectangle for the path
+            # Draw the black rectangle for the path
+            elif board[row][col] == 0:
                 pygame.draw.rect(screen, black,
                                  (widht + col * case_size, height + row * case_size,
                                   case_size, case_size))
@@ -105,18 +106,18 @@ def draw_board(screen):
             elif board[row][col] == 5:
                 screen.blit(pepper_image, (widht + col * case_size, height + row * case_size))
 
-            # Veggie 1 (Carrot)
+            # Blue Ghost
             elif board[row][col] == 6:
                 screen.blit(blue_ghost_image, (widht + col * case_size, height + row * case_size))
 
-            # Veggie 2 (Eggplant)
+            # Orange Ghost
             elif board[row][col] == 7:
                 screen.blit(orange_ghost_image, (widht + col * case_size, height + row * case_size))
 
-            # Veggie 3 (Onion)
+            # Pink Ghost
             elif board[row][col] == 8:
                 screen.blit(pink_ghost_image, (widht + col * case_size, height + row * case_size))
 
-            # Veggie 4 (Pepper)
+            # Red Ghost
             elif board[row][col] == 9:
                 screen.blit(red_ghost_image, (widht + col * case_size, height + row * case_size))

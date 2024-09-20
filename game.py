@@ -50,7 +50,7 @@ def game_loop():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-        # Draw the maze on the screen
+        # Draw the board on the screen
         draw_board(screen)
         pygame.display.update()
 
