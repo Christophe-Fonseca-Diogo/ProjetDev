@@ -6,7 +6,9 @@
 ###
 
 import player
+from board import draw_board
 from dependencies import *
+
 
 # Music for the game
 def game_music():
@@ -48,6 +50,8 @@ def game_loop():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+        # Draw the maze on the screen
+        draw_board(screen)
         pygame.display.update()
 
 
