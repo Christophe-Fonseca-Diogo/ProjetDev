@@ -6,7 +6,6 @@
 ###
 
 import pygame
-from game import player_x, player_y
 # Load all the images for the game
 def load_player_images(width, height):
     player_images = []
