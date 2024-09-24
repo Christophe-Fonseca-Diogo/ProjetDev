@@ -4,11 +4,13 @@
 # Made by Christophe & Zachary
 # SI-C3A
 ###
-
 import player
 from board import draw_board
 from dependencies import *
 
+
+player_x = 377
+player_y = 450
 
 # Music for the game
 def game_music():
@@ -47,22 +49,26 @@ def game_settings():
     game_icon = pygame.image.load('Icons/Joystick.png')
 
     pygame.display.set_icon(game_icon)
-    player_images = player.load_player_images(100, 100)
-    character = player.draw_player(screen, player_images, window_width, window_height, 0)
+    player_images = player.load_player_images(40, 40)
 
 
 # Loop for the game
 def game_loop():
+    global player_x, player_y
     running = True
     # Background music for the game
     game_music()
-    game_title()
     while running:
         # Handle events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+        # Fill the screen with black
+        screen.fill(black)
+        game_title()
         draw_board(screen)
+        player_x, player_y = player.player_movements(pygame.key.get_pressed(), player_x, player_y)
+        player.draw_player(screen, player_images, player_x, player_y, 0)
         pygame.display.update()
 
 

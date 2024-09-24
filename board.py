@@ -13,28 +13,30 @@ pygame.init()
 # 1 = Wall
 # 2-5 Veggies
 # 6-9 Ghosts
+# 10 Player
+
 board = [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1],
-    [1, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 3,1],
-    [1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0,1],
-    [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,1],
-    [1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0,1],
-    [1, 0, 1, 0, 0, 6, 1, 1, 1, 1, 1, 7, 0, 0, 1, 0,1],
-    [1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1,1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,1],
-    [1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0,1],
-    [1, 0, 1, 0, 0, 8, 1, 0, 0, 0, 1, 9, 0, 0, 1, 0,1],
-    [1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0,1],
-    [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,1],
-    [1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0,1],
-    [1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5,1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 3, 1],
+    [1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1],
+    [1, 0, 1, 0, 0, 6, 0, 0, 0, 0, 0, 7, 0, 0, 1, 0, 1],
+    [1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1],
+    [1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1],
+    [1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1],
+    [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1],
+    [1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, 0, 8, 0, 0, 0, 0, 0, 9, 0, 0, 1, 0, 1],
+    [1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1],
+    [1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ]
 
 # Function to draw the board
 def draw_board(screen):
     case_size = 45
-    widht = (800 - (len(board[0]) * case_size)) // 2
+    width = (800 - (len(board[0]) * case_size)) // 2
     height = (950 - (len(board) * case_size)) // 2
 
     # Load and scale veggies images
@@ -65,7 +67,7 @@ def draw_board(screen):
 
     # Load and scale the coin image
     coin_image = pygame.image.load('Assets/Coin.png')
-    scaled_coin_size = (25, 25)
+    scaled_coin_size = (20, 20)
     coin_image = pygame.transform.scale(coin_image, scaled_coin_size)
 
     # Draw the maze on the screen
@@ -74,49 +76,23 @@ def draw_board(screen):
             # Draw the wall
             if board[row][col] == 1:
                 pygame.draw.rect(screen, blue,
-                                 (widht + col * case_size, height + row * case_size,
+                                 (width + col * case_size, height + row * case_size,
                                   case_size, case_size))
             # Draw the black rectangle for the path
             elif board[row][col] == 0:
                 pygame.draw.rect(screen, black,
-                                 (widht + col * case_size, height + row * case_size,
+                                 (width + col * case_size, height + row * case_size,
                                   case_size, case_size))
 
                 # Calculate the position to center the coin
-                coin_x = widht + col * case_size + (case_size - scaled_coin_size[0]) // 2
+                coin_x = width + col * case_size + (case_size - scaled_coin_size[0]) // 2
                 coin_y = height + row * case_size + (case_size - scaled_coin_size[1]) // 2
 
                 # Draw the coin image
                 screen.blit(coin_image, (coin_x, coin_y))
 
-            # Veggie 1 (Carrot)
-            elif board[row][col] == 2:
-                screen.blit(carrot_image, (widht + col * case_size, height + row * case_size))
-
-            # Veggie 2 (Eggplant)
-            elif board[row][col] == 3:
-                screen.blit(eggplant_image, (widht + col * case_size, height + row * case_size))
-
-            # Veggie 3 (Onion)
-            elif board[row][col] == 4:
-                screen.blit(onion_image, (widht + col * case_size, height + row * case_size))
-
-            # Veggie 4 (Pepper)
-            elif board[row][col] == 5:
-                screen.blit(pepper_image, (widht + col * case_size, height + row * case_size))
-
-            # Blue Ghost
-            elif board[row][col] == 6:
-                screen.blit(blue_ghost_image, (widht + col * case_size, height + row * case_size))
-
-            # Orange Ghost
-            elif board[row][col] == 7:
-                screen.blit(orange_ghost_image, (widht + col * case_size, height + row * case_size))
-
-            # Pink Ghost
-            elif board[row][col] == 8:
-                screen.blit(pink_ghost_image, (widht + col * case_size, height + row * case_size))
-
-            # Red Ghost
-            elif board[row][col] == 9:
-                screen.blit(red_ghost_image, (widht + col * case_size, height + row * case_size))
+            # Draw all the objects in map
+            elif 2 <= board[row][col] <= 9:
+                obj_list = { 2: eggplant_image, 3: carrot_image, 4: onion_image, 5: pepper_image,
+                             6: blue_ghost_image, 7: orange_ghost_image, 8: pink_ghost_image, 9: red_ghost_image}
+                screen.blit(obj_list[board[row][col]], (width + col * case_size, height + row * case_size))
