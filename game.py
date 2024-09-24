@@ -7,7 +7,7 @@
 import player
 from board import draw_board
 from dependencies import *
-
+from player import player_movements
 
 player_x = 377
 player_y = 450
@@ -55,6 +55,10 @@ def game_settings():
 # Loop for the game
 def game_loop():
     global player_x, player_y
+    current_image_index = 0
+    frame_count = 0
+    frame_limit = 5
+    frame_count += 1
     running = True
     # Background music for the game
     game_music()
@@ -68,7 +72,11 @@ def game_loop():
         game_title()
         draw_board(screen)
         player_x, player_y = player.player_movements(pygame.key.get_pressed(), player_x, player_y)
-        player.draw_player(screen, player_images, player_x, player_y, 0)
+        frame_count += 1
+        if frame_count >= frame_limit:
+            current_image_index = (current_image_index + 1) % len(player_images)
+            frame_count = 0
+        player.draw_player(screen, player_images, player_x, player_y, current_image_index)
         pygame.display.update()
 
 
