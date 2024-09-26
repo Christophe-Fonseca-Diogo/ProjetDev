@@ -1,11 +1,12 @@
 ###
 # This file is for all the settings of the player
-# Last Edited : 06.09.2024
+# Last Edited : 26.09.2024
 # Made by Christophe & Zachary
 # SI-C3A
 ###
 
 import pygame
+
 # Load all the images for the game
 def load_player_images(width, height):
     player_images = []
@@ -16,30 +17,59 @@ def load_player_images(width, height):
         player_images.append(scaled_image)
     return player_images
 
-# Function for placing the player in the game
-def draw_player(screen, player_images, player_x, player_y, current_image_index):
+
+# Function for having the player in the game and the rotation of the images
+def draw_player(screen, player_images, player_x, player_y, current_image_index, direction):
+
     if player_images:
         current_image = player_images[current_image_index]
+
+        # Flip image for the left direction
+        if direction == 'left':
+            # Flip horizontally
+            current_image = pygame.transform.flip(current_image, True, False)
+
+        # Rotate the image for up and down directions
+        if direction == 'up':
+            current_image = pygame.transform.rotate(current_image, 90)
+        elif direction == 'down':
+            current_image = pygame.transform.rotate(current_image, -90)
+
+        # Draw the image
         screen.blit(current_image, (player_x, player_y))
 
-def player_movements(pressed, player_x, player_y):
+
+# Player movements with the direction
+def player_movements(pressed, player_x, player_y, direction):
+
+    moving = False
+
     if pressed[pygame.K_UP]:
         player_y -= 5
-    if pressed[pygame.K_DOWN]:
+        direction = 'up'
+        moving = True
+    elif pressed[pygame.K_DOWN]:
         player_y += 5
-    if pressed[pygame.K_RIGHT]:
+        direction = 'down'
+        moving = True
+    elif pressed[pygame.K_RIGHT]:
         player_x += 5
-    if pressed[pygame.K_LEFT]:
+        direction = 'right'
+        moving = True
+    elif pressed[pygame.K_LEFT]:
         player_x -= 5
+        direction = 'left'
+        moving = True
 
-    return player_x, player_y
+    return player_x, player_y, direction, moving
 
 
-def player_animation(screen, player_images, player_x, player_y, current_image_index, frame_count, frame_limit):
+# Animating the player with the images
+def player_animation(screen, player_images, player_x, player_y, current_image_index, frame_count, frame_limit, direction):
     frame_count += 1
     if frame_count >= frame_limit:
         current_image_index = (current_image_index + 1) % len(player_images)
         frame_count = 0
 
-    draw_player(screen, player_images, player_x, player_y, current_image_index)
-    return current_image_index, frame_count  # Return updated values
+    draw_player(screen, player_images, player_x, player_y, current_image_index, direction)
+    return current_image_index, frame_count

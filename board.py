@@ -1,11 +1,11 @@
 ###
 # This file is for the board
-# Last Edited : 06.09.2024
+# Last Edited : 26.09.2024
 # Made by Christophe & Zachary
 # SI-C3A
 ###
-import pygame
 
+import pygame
 from dependencies import *
 pygame.init()
 
@@ -32,6 +32,7 @@ board = [
     [1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ]
+
 
 # Function to draw the board
 def draw_board(screen):
@@ -70,14 +71,16 @@ def draw_board(screen):
     scaled_coin_size = (20, 20)
     coin_image = pygame.transform.scale(coin_image, scaled_coin_size)
 
-    # Draw the maze on the screen
+    # Draw the board on the screen
     for row in range(len(board)):
         for col in range(len(board[row])):
+
             # Draw the wall
             if board[row][col] == 1:
                 pygame.draw.rect(screen, blue,
                                  (width + col * case_size, height + row * case_size,
                                   case_size, case_size))
+
             # Draw the black rectangle for the path
             elif board[row][col] == 0:
                 pygame.draw.rect(screen, black,

@@ -1,9 +1,10 @@
 ###
 # This file is for the game
-# Last Edited : 06.09.2024
+# Last Edited : 26.09.2024
 # Made by Christophe & Zachary
 # SI-C3A
 ###
+
 import player
 from board import draw_board
 from dependencies import *
@@ -18,6 +19,7 @@ def game_music():
     # -1 for infinite loop
     music.play(loops=-1)
 
+
 def game_title():
     # Title settings
     title_font = pygame.font.Font('Assets/PAC-FONT.TTF', 80)
@@ -28,6 +30,7 @@ def game_title():
     title_text_rect.center = (window_width // 2, window_height // 12)
     # show in the screen
     screen.blit(title_text, title_text_rect)
+
 
 # Window settings for the game
 def game_settings():
@@ -55,9 +58,13 @@ def game_settings():
 def game_loop():
     global player_x, player_y
 
-    current_image_index = 0  # Initialize the image index
-    frame_count = 0  # Initialize the frame count
-    frame_limit = 5  # Set the frame limit
+    # Initialize the image index
+    current_image_index = 0
+    # Initialize the frame count
+    frame_count = 0
+    # Set the frame limit
+    frame_limit = 5
+    last_direction = 'right'
 
     running = True
     # Background music for the game
@@ -67,19 +74,18 @@ def game_loop():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+
         # Fill the screen with black
         screen.fill(black)
         game_title()
         draw_board(screen)
+
         # Get player movements and direction
-        player_x, player_y = player.player_movements(pygame.key.get_pressed(), player_x, player_y)
-
-        # Call player_animation with the current direction
-        current_image_index, frame_count = player.player_animation(
-            screen, player_images, player_x, player_y,
-            current_image_index, frame_count, frame_limit
-        )
-
+        player_x, player_y, last_direction, moving = player.player_movements(pygame.key.get_pressed(), player_x,
+                                                                             player_y, last_direction)
+        # Update the player's animation based on position
+        current_image_index, frame_count = player.player_animation(screen, player_images, player_x, player_y,current_image_index,
+                                                                   frame_count, frame_limit, last_direction)
         pygame.display.update()
 
 

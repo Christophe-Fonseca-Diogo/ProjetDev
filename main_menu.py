@@ -1,9 +1,10 @@
 ###
 # This file is for the Main Menu of our game : Pac-Man
-# Last Edited : 06.09.2024
+# Last Edited : 26.09.2024
 # Made by Christophe & Zachary
 # SI-C3A
 ###
+
 import pygame.mixer
 from dependencies import *
 from game import game_loop, game_settings
@@ -16,6 +17,7 @@ def menu_music():
     music = pygame.mixer.Sound("Assets/Sounds/Menu.mp3")
     # -1 for infinite loop
     music.play(loops=-1)
+
 
 # Settings for the window
 def main_settings():
