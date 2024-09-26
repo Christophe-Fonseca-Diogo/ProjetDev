@@ -33,3 +33,13 @@ def player_movements(pressed, player_x, player_y):
         player_x -= 5
 
     return player_x, player_y
+
+
+def player_animation(screen, player_images, player_x, player_y, current_image_index, frame_count, frame_limit):
+    frame_count += 1
+    if frame_count >= frame_limit:
+        current_image_index = (current_image_index + 1) % len(player_images)
+        frame_count = 0
+
+    draw_player(screen, player_images, player_x, player_y, current_image_index)
+    return current_image_index, frame_count  # Return updated values
