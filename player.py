@@ -15,6 +15,7 @@ def load_player_images(width, height):
         # Scale the image of the player
         scaled_image = pygame.transform.scale(image, (width, height))
         player_images.append(scaled_image)
+
     return player_images
 
 
@@ -83,4 +84,5 @@ def player_animation(screen, player_images, player_x, player_y, current_image_in
 
     # Draw the player image with the current direction
     draw_player(screen, player_images, player_x, player_y, current_image_index, direction)
+
     return current_image_index, frame_count
