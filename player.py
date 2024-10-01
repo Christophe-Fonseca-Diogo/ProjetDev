@@ -1,6 +1,6 @@
 ###
 # This file is for all the settings of the player
-# Last Edited : 26.09.2024
+# Last Edited : 01.10.2024
 # Made by Christophe & Zachary
 # SI-C3A
 ###
@@ -44,18 +44,25 @@ def player_movements(pressed, player_x, player_y, direction):
 
     moving = False
 
+    # Direction UP
     if pressed[pygame.K_UP]:
         player_y -= 5
         direction = 'up'
         moving = True
+
+    # Direction Down
     elif pressed[pygame.K_DOWN]:
         player_y += 5
         direction = 'down'
         moving = True
+
+    # Direction Right
     elif pressed[pygame.K_RIGHT]:
         player_x += 5
         direction = 'right'
         moving = True
+
+    # Direction Left
     elif pressed[pygame.K_LEFT]:
         player_x -= 5
         direction = 'left'
@@ -66,10 +73,14 @@ def player_movements(pressed, player_x, player_y, direction):
 
 # Animating the player with the images
 def player_animation(screen, player_images, player_x, player_y, current_image_index, frame_count, frame_limit, direction):
+
+    # Increment the frame count
     frame_count += 1
+
     if frame_count >= frame_limit:
         current_image_index = (current_image_index + 1) % len(player_images)
         frame_count = 0
 
+    # Draw the player image with the current direction
     draw_player(screen, player_images, player_x, player_y, current_image_index, direction)
     return current_image_index, frame_count
