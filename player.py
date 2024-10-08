@@ -78,7 +78,7 @@ def player_animation(screen, player_images, player_x, player_y, current_image_in
     # Increment the frame count
     frame_count += 1
 
-    if frame_count >= frame_limit and tick == 2:
+    if frame_count >= frame_limit and tick == 1:
         current_image_index = (current_image_index + 1) % len(player_images)
         frame_count = 0
 
