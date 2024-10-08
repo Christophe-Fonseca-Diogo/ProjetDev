@@ -6,6 +6,7 @@
 ###
 
 import player
+from ghosts import *
 from board import draw_board
 from dependencies import *
 
@@ -56,7 +57,7 @@ def game_settings():
 
 # Loop for the game
 def game_loop():
-    global player_x, player_y
+    global player_x, player_y, tick
 
     # Initialize the image index
     current_image_index = 0
@@ -64,11 +65,18 @@ def game_loop():
     frame_count = 0
     # Set the frame limit
     frame_limit = 5
+    tick = 0
     last_direction = 'right'
+
+    # Load ghosts images and create ghost instances
+    case_size = 45
+    ghost_images = load_ghost_images(case_size)  # Load ghost images
+    ghosts = create_ghosts(board, ghost_images)  # Create ghost instances
 
     running = True
     # Background music for the game
     game_music()
+
     while running:
         # Handle events
         for event in pygame.event.get():
@@ -77,6 +85,7 @@ def game_loop():
 
         # Fill the screen with black
         screen.fill(black)
+        # Draw game title and the board
         game_title()
         draw_board(screen)
 
@@ -85,7 +94,20 @@ def game_loop():
                                                                              player_y, last_direction)
         # Update the player's animation based on position
         current_image_index, frame_count = player.player_animation(screen, player_images, player_x, player_y,current_image_index,
-                                                                   frame_count, frame_limit, last_direction)
+                                                                   frame_count, frame_limit, last_direction, tick)
+
+        if tick == 15:
+            # Move the ghosts
+            tick = 0
+            move_ghosts(ghosts)
+
+        tick += 1
+
+        # Draw the ghosts on the screen
+        width = (800 - (len(board[0]) * case_size)) // 2
+        height = (950 - (len(board) * case_size)) // 2
+        draw_ghosts(screen, ghosts, width, height)  # Draw ghosts
+
         pygame.display.update()
 
 

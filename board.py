@@ -53,19 +53,6 @@ def draw_board(screen):
     pepper_image = pygame.image.load('Assets/Veggies/pepper.png')
     pepper_image = pygame.transform.scale(pepper_image, (case_size, case_size))
 
-    # Load and scale ghosts images
-    blue_ghost_image = pygame.image.load('Assets/Ghosts/blue.png')
-    blue_ghost_image = pygame.transform.scale(blue_ghost_image, (case_size, case_size))
-
-    orange_ghost_image = pygame.image.load('Assets/Ghosts/orange.png')
-    orange_ghost_image = pygame.transform.scale(orange_ghost_image, (case_size, case_size))
-
-    pink_ghost_image = pygame.image.load('Assets/Ghosts/pink.png')
-    pink_ghost_image = pygame.transform.scale(pink_ghost_image, (case_size, case_size))
-
-    red_ghost_image = pygame.image.load('Assets/Ghosts/red.png')
-    red_ghost_image = pygame.transform.scale(red_ghost_image, (case_size, case_size))
-
     # Load and scale the coin image
     coin_image = pygame.image.load('Assets/Coin.png')
     scaled_coin_size = (20, 20)
@@ -94,8 +81,7 @@ def draw_board(screen):
                 # Draw the coin image
                 screen.blit(coin_image, (coin_x, coin_y))
 
-            # Draw all the objects in map
-            elif 2 <= board[row][col] <= 9:
-                obj_list = { 2: eggplant_image, 3: carrot_image, 4: onion_image, 5: pepper_image,
-                             6: blue_ghost_image, 7: orange_ghost_image, 8: pink_ghost_image, 9: red_ghost_image}
+            # Draw veggies
+            elif 2 <= board[row][col] <= 5:
+                obj_list = {2: eggplant_image, 3: carrot_image, 4: onion_image, 5: pepper_image}
                 screen.blit(obj_list[board[row][col]], (width + col * case_size, height + row * case_size))

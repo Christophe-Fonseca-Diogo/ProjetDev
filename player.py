@@ -73,12 +73,12 @@ def player_movements(pressed, player_x, player_y, direction):
 
 
 # Animating the player with the images
-def player_animation(screen, player_images, player_x, player_y, current_image_index, frame_count, frame_limit, direction):
+def player_animation(screen, player_images, player_x, player_y, current_image_index, frame_count, frame_limit, direction, tick):
 
     # Increment the frame count
     frame_count += 1
 
-    if frame_count >= frame_limit:
+    if frame_count >= frame_limit and tick == 2:
         current_image_index = (current_image_index + 1) % len(player_images)
         frame_count = 0
 
