@@ -36,7 +36,7 @@ board = [
 
 # Function to draw the board
 def draw_board(screen):
-    case_size = 45
+    case_size
     width = (800 - (len(board[0]) * case_size)) // 2
     height = (950 - (len(board) * case_size)) // 2
 

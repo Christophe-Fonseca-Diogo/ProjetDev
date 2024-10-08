@@ -7,6 +7,14 @@
 
 import pygame
 
+case_size = 45  # Size of each case in pixels
+starting_row = 7  # Row where the player will start (depends on your grid)
+starting_col = 8  # Column where the player will start (depends on your grid)
+
+# Initialize player position based on the chosen starting grid cell
+player_x = starting_col * case_size
+player_y = starting_row * case_size
+
 # Load all the images for the game
 def load_player_images(width, height):
     player_images = []

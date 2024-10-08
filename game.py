@@ -69,7 +69,7 @@ def game_loop():
     last_direction = 'right'
 
     # Load ghosts images and create ghost instances
-    case_size = 45
+    case_size
     ghost_images = load_ghost_images(case_size)  # Load ghost images
     ghosts = create_ghosts(board, ghost_images)  # Create ghost instances
 
@@ -95,6 +95,8 @@ def game_loop():
         # Update the player's animation based on position
         current_image_index, frame_count = player.player_animation(screen, player_images, player_x, player_y,current_image_index,
                                                                    frame_count, frame_limit, last_direction, tick)
+        # Example initialization:
+        # Place the player in its starting position (presumably in the board array)
 
         if tick == 15:
             # Move the ghosts
