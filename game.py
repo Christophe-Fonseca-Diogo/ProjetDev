@@ -69,7 +69,6 @@ def game_loop():
     last_direction = 'right'
 
     # Load ghosts images and create ghost instances
-    case_size
     ghost_images = load_ghost_images(case_size)  # Load ghost images
     ghosts = create_ghosts(board, ghost_images)  # Create ghost instances
 
