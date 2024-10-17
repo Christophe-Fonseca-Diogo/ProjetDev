@@ -1,17 +1,13 @@
-###
 # This file is for the game
 # Last Edited : 26.09.2024
 # Made by Christophe & Zachary
 # SI-C3A
 ###
-
+import board
 import player
 from ghosts import *
 from board import draw_board
 from dependencies import *
-
-player_x = 377
-player_y = 450
 
 # Music for the game
 def game_music():
@@ -52,64 +48,65 @@ def game_settings():
     game_icon = pygame.image.load('Icons/Joystick.png')
 
     pygame.display.set_icon(game_icon)
-    player_images = player.load_player_images(40, 40)
+    player_images = player.load_player_images(case_size)
 
 
 # Loop for the game
 def game_loop():
     global player_x, player_y, tick
 
-    # Initialize the image index
+    player_x = player.starting_col * player.case_size
+    player_y = player.starting_row * player.case_size
+
     current_image_index = 0
-    # Initialize the frame count
     frame_count = 0
-    # Set the frame limit
     frame_limit = 5
     tick = 0
     last_direction = 'right'
 
-    # Load ghosts images and create ghost instances
-    ghost_images = load_ghost_images(case_size)  # Load ghost images
-    ghosts = create_ghosts(board, ghost_images)  # Create ghost instances
+    ghost_images = load_ghost_images(player.case_size)
+    ghosts = create_ghosts(board, ghost_images)
 
     running = True
-    # Background music for the game
     game_music()
 
     while running:
-        # Handle events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
-        # Fill the screen with black
         screen.fill(black)
-        # Draw game title and the board
         game_title()
-        draw_board(screen)
 
         # Get player movements and direction
-        player_x, player_y, last_direction, moving = player.player_movements(pygame.key.get_pressed(), player_x,
-                                                                             player_y, last_direction)
+        player_x, player_y, last_direction, moving = player.player_movements(
+            pygame.key.get_pressed(), player_x, player_y, last_direction, player.case_size)
+
+        # Update the board to reflect new player position
+        player.update_board(board, player_x, player_y)
+
         # Update the player's animation based on position
-        current_image_index, frame_count = player.player_animation(screen, player_images, player_x, player_y,current_image_index,
-                                                                   frame_count, frame_limit, last_direction, tick)
-        # Example initialization:
-        # Place the player in its starting position (presumably in the board array)
+        current_image_index, frame_count = player.player_animation(screen, player_images, player_x, player_y,
+                                                                   current_image_index, frame_count, frame_limit,
+                                                                   last_direction, tick)
 
         if tick == 15:
-            # Move the ghosts
             tick = 0
             move_ghosts(ghosts)
 
         tick += 1
 
-        # Draw the ghosts on the screen
-        width = (800 - (len(board[0]) * case_size)) // 2
-        height = (950 - (len(board) * case_size)) // 2
-        draw_ghosts(screen, ghosts, width, height)  # Draw ghosts
+        width = (800 - (len(board[0]) * player.case_size)) // 2
+        height = (950 - (len(board) * player.case_size)) // 2
 
-        pygame.display.update()
+        # Draw the board with the new board state that includes player position
+        draw_board(screen)
+
+        # Draw ghosts on the screen
+        draw_ghosts(screen, ghosts, width, height)
+
+        # Update the display
+        pygame.display.flip()
 
 
 if __name__ == "__main__":

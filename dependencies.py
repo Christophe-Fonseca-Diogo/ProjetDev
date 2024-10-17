@@ -15,3 +15,6 @@ yellow = (238, 210, 2)
 blue = (0, 0, 255)
 black = (0, 0, 0)
 case_size = 45
+
+starting_row = 7  # Row where the player will start
+starting_col = 8 # Column where the player will start

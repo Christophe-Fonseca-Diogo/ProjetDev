@@ -6,36 +6,28 @@
 ###
 
 import pygame
+from board import board
+from dependencies import *
 
-case_size = 45  # Size of each case in pixels
-starting_row = 7  # Row where the player will start (depends on your grid)
-starting_col = 8  # Column where the player will start (depends on your grid)
-
-# Initialize player position based on the chosen starting grid cell
-player_x = starting_col * case_size
-player_y = starting_row * case_size
 
 # Load all the images for the game
-def load_player_images(width, height):
+def load_player_images(case_size):
     player_images = []
     for i in range(1, 5):
         image = pygame.image.load(f'Assets/Player_Model/Player_{i}.png')
         # Scale the image of the player
-        scaled_image = pygame.transform.scale(image, (width, height))
+        scaled_image = pygame.transform.scale(image, (case_size, case_size))
         player_images.append(scaled_image)
 
     return player_images
 
-
 # Function for having the player in the game and the rotation of the images
 def draw_player(screen, player_images, player_x, player_y, current_image_index, direction):
-
     if player_images:
         current_image = player_images[current_image_index]
 
         # Flip image for the left direction
         if direction == 'left':
-            # Flip horizontally
             current_image = pygame.transform.flip(current_image, True, False)
 
         # Rotate the image for up and down directions
@@ -44,38 +36,63 @@ def draw_player(screen, player_images, player_x, player_y, current_image_index, 
         elif direction == 'down':
             current_image = pygame.transform.rotate(current_image, -90)
 
+        # Calculate draw position based on case size to center it
+        draw_pos_x = 10
+        draw_pos_y = 10
+
         # Draw the image
-        screen.blit(current_image, (player_x, player_y))
+        screen.blit(current_image, (draw_pos_x, draw_pos_y))
+
+# Function to update board
+def update_board(board, player_x, player_y):
+    grid_x = player_x // case_size
+    grid_y = player_y // case_size
+
+    # Clean previous position
+    for row in range(len(board)):
+        for col in range(len(board[row])):
+            if board[row][col] == 10:
+                board[row][col] = 11  # Set previous position to empty
+
+    # Set new position
+    board[grid_y][grid_x] = 10
 
 
 # Player movements with the direction
-def player_movements(pressed, player_x, player_y, direction):
-
+def player_movements(pressed, player_x, player_y, direction, case_size):
     moving = False
+
+    # Calculate the player's grid position based on the case size
+    grid_x = player_x // case_size
+    grid_y = player_y // case_size
 
     # Direction UP
     if pressed[pygame.K_UP]:
-        player_y -= 5
-        direction = 'up'
-        moving = True
+        if grid_y > 0 and board[grid_y - 1][grid_x] != 1:  # Not moving out of bounds and not a wall
+            player_y -= 5
+            direction = 'up'
+            moving = True
 
     # Direction Down
     elif pressed[pygame.K_DOWN]:
-        player_y += 5
-        direction = 'down'
-        moving = True
+        if grid_y < len(board) - 1 and board[grid_y + 1][grid_x] != 1:  # Not moving out of bounds and not a wall
+            player_y += 5
+            direction = 'down'
+            moving = True
 
     # Direction Right
     elif pressed[pygame.K_RIGHT]:
-        player_x += 5
-        direction = 'right'
-        moving = True
+        if grid_x < len(board[0]) - 1 and board[grid_y][grid_x + 1] != 1:  # Not moving out of bounds and not a wall
+            player_x += 5
+            direction = 'right'
+            moving = True
 
     # Direction Left
     elif pressed[pygame.K_LEFT]:
-        player_x -= 5
-        direction = 'left'
-        moving = True
+        if grid_x > 0 and board[grid_y][grid_x - 1] != 1:  # Not moving out of bounds and not a wall
+            player_x -= 5
+            direction = 'left'
+            moving = True
 
     return player_x, player_y, direction, moving
 

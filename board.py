@@ -9,15 +9,16 @@ import pygame
 from dependencies import *
 pygame.init()
 
-# 0 = Nothing
+# 0 = Coins and Path
 # 1 = Wall
 # 2-5 Veggies
 # 6-9 Ghosts
 # 10 Player
+# 11 Only the path
 
 board = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 2, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 3, 1],
+    [1, 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 3, 1],
     [1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1],
     [1, 0, 1, 0, 0, 6, 0, 0, 1, 0, 0, 7, 0, 0, 1, 0, 1],
     [1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1],
@@ -36,7 +37,6 @@ board = [
 
 # Function to draw the board
 def draw_board(screen):
-    case_size
     width = (800 - (len(board[0]) * case_size)) // 2
     height = (950 - (len(board) * case_size)) // 2
 
@@ -85,3 +85,9 @@ def draw_board(screen):
             elif 2 <= board[row][col] <= 5:
                 obj_list = {2: eggplant_image, 3: carrot_image, 4: onion_image, 5: pepper_image}
                 screen.blit(obj_list[board[row][col]], (width + col * case_size, height + row * case_size))
+
+            # Draw the black rectangle for the path
+            elif board[row][col] == 11:
+                pygame.draw.rect(screen, black,
+                                 (width + col * case_size, height + row * case_size,
+                                  case_size, case_size))
