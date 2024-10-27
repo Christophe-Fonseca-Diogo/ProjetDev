@@ -49,14 +49,14 @@ def game_settings():
 def draw_lives(screen, lives):
     font = pygame.font.Font(None, 36)
     lives_text = font.render(f'Lives: {lives}', True, white)
-    screen.blit(lives_text, (10, 10))  # Position top left
+    screen.blit(lives_text, (10, 825))
 
 
 # Function to draw the score on the screen
 def draw_score(screen, score):
-    font = pygame.font.Font(None, 36)  # Default font
+    font = pygame.font.Font(None, 36)
     score_text = font.render(f'Score: {score}', True, white)
-    screen.blit(score_text, (650, 850))  # Position it below the lives
+    screen.blit(score_text, (650, 825))
 
 def game_loop():
     global tick
