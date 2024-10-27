@@ -22,7 +22,7 @@ def load_player_images(case_size):
     return player_images
 
 # Function for having the player in the game and the rotation of the images
-def draw_player(screen, player_images, player_x, player_y, current_image_index, direction):
+def draw_player(screen, player_images, player_x, player_y, current_image_index, direction, offset_x, offset_y):
     if player_images:
         current_image = player_images[current_image_index]
 
@@ -37,11 +37,11 @@ def draw_player(screen, player_images, player_x, player_y, current_image_index, 
             current_image = pygame.transform.rotate(current_image, -90)
 
         # Calculate draw position based on case size to center it
-        draw_pos_x = 10
-        draw_pos_y = 10
+        player_xPos = offset_x + player_x
+        player_yPos = offset_y + player_y
 
         # Draw the image
-        screen.blit(current_image, (draw_pos_x, draw_pos_y))
+        screen.blit(current_image, (player_xPos, player_yPos))
 
 # Function to update board
 def update_board(board, player_x, player_y):
@@ -98,7 +98,7 @@ def player_movements(pressed, player_x, player_y, direction, case_size):
 
 
 # Animating the player with the images
-def player_animation(screen, player_images, player_x, player_y, current_image_index, frame_count, frame_limit, direction, tick):
+def player_animation(screen, player_images, player_x, player_y, current_image_index, frame_count, frame_limit, direction, tick, offset_x, offset_y):
 
     # Increment the frame count
     frame_count += 1
@@ -108,6 +108,6 @@ def player_animation(screen, player_images, player_x, player_y, current_image_in
         frame_count = 0
 
     # Draw the player image with the current direction
-    draw_player(screen, player_images, player_x, player_y, current_image_index, direction)
+    draw_player(screen, player_images, player_x, player_y, current_image_index, direction, offset_x, offset_y)
 
     return current_image_index, frame_count

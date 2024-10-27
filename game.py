@@ -78,18 +78,6 @@ def game_loop():
         screen.fill(black)
         game_title()
 
-        # Get player movements and direction
-        player_x, player_y, last_direction, moving = player.player_movements(
-            pygame.key.get_pressed(), player_x, player_y, last_direction, player.case_size)
-
-        # Update the board to reflect new player position
-        player.update_board(board, player_x, player_y)
-
-        # Update the player's animation based on position
-        current_image_index, frame_count = player.player_animation(screen, player_images, player_x, player_y,
-                                                                   current_image_index, frame_count, frame_limit,
-                                                                   last_direction, tick)
-
         if tick == 15:
             tick = 0
             move_ghosts(ghosts)
@@ -105,9 +93,20 @@ def game_loop():
         # Draw ghosts on the screen
         draw_ghosts(screen, ghosts, width, height)
 
+        # Get player movements and direction
+        player_x, player_y, last_direction, moving = player.player_movements(
+            pygame.key.get_pressed(), player_x, player_y, last_direction, player.case_size)
+
+        # Update the board to reflect new player position
+        player.update_board(board, player_x, player_y)
+
+        # Update the player's animation based on position
+        current_image_index, frame_count = player.player_animation(screen, player_images, player_x, player_y,
+                                                                   current_image_index, frame_count, frame_limit,
+                                                                   last_direction, tick, width, height)
+
         # Update the display
         pygame.display.flip()
-
 
 if __name__ == "__main__":
     # Main windows settings
