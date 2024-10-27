@@ -53,10 +53,11 @@ def game_settings():
 
 # Loop for the game
 def game_loop():
-    global player_x, player_y, tick
+    global tick
 
-    player_x = player.starting_col * player.case_size
-    player_y = player.starting_row * player.case_size
+    # Initialize player's grid position
+    player_grid_x = player.starting_col
+    player_grid_y = player.starting_row
 
     current_image_index = 0
     frame_count = 0
@@ -87,26 +88,30 @@ def game_loop():
         width = (800 - (len(board[0]) * player.case_size)) // 2
         height = (950 - (len(board) * player.case_size)) // 2
 
-        # Draw the board with the new board state that includes player position
+        # Draw the board
         draw_board(screen)
 
-        # Draw ghosts on the screen
+        # Draw ghosts
         draw_ghosts(screen, ghosts, width, height)
 
         # Get player movements and direction
-        player_x, player_y, last_direction, moving = player.player_movements(
-            pygame.key.get_pressed(), player_x, player_y, last_direction, player.case_size)
+        player_grid_x, player_grid_y, last_direction, moving = player.player_movements(
+            pygame.key.get_pressed(), player_grid_x, player_grid_y, last_direction, frame_count)
 
-        # Update the board to reflect new player position
-        player.update_board(board, player_x, player_y)
+        # Update the board with the player's grid position
+        player.update_board(board, player_grid_x, player_grid_y)
 
         # Update the player's animation based on position
-        current_image_index, frame_count = player.player_animation(screen, player_images, player_x, player_y,
-                                                                   current_image_index, frame_count, frame_limit,
-                                                                   last_direction, tick, width, height)
+        current_image_index, frame_count = player.player_animation(screen, player_images,
+            player_grid_x * player.case_size, player_grid_y * player.case_size,
+            current_image_index, frame_count, frame_limit, last_direction, tick, width, height)
 
         # Update the display
         pygame.display.flip()
+
+
+
+
 
 if __name__ == "__main__":
     # Main windows settings
