@@ -1,20 +1,24 @@
 # This file is for the game
-# Last Edited : 26.09.2024
+# Last Edited : 27.10.2024
 # Made by Christophe & Zachary
 # SI-C3A
 ###
+
 import board
 import player
 from ghosts import *
 from board import draw_board
-from dependencies import *
+from game_over import *
+
+music = None
 
 # Music for the game
 def game_music():
+    global music
     pygame.mixer.init()
     music = pygame.mixer.Sound("Assets/Sounds/Game.mp3")
-    # -1 for infinite loop
-    music.play(loops=-1)
+    music.set_volume(0.5)
+    music.play(loops=-1)  # -1 for infinite loop
 
 
 def game_title():
@@ -22,51 +26,56 @@ def game_title():
     title_font = pygame.font.Font('Assets/PAC-FONT.TTF', 80)
     title_text = title_font.render('PAC-MAN', True, yellow, (0, 0, 0))
     title_text_rect = title_text.get_rect()
-
-    # set the center of the rectangular object.
     title_text_rect.center = (window_width // 2, window_height // 12)
-    # show in the screen
     screen.blit(title_text, title_text_rect)
 
 
 # Window settings for the game
 def game_settings():
-    global player_images, character
+    global player_images
     pygame.init()
     global screen, window_width, window_height
-    # Set up the window dimensions
     window_width = 800
     window_height = 900
 
-    # Create the screen object
     screen = pygame.display.set_mode((window_width, window_height))
-
-    # Set the title of the window
     pygame.display.set_caption("GAME PAC-MAN")
-
-    # Set the icon of the window
     game_icon = pygame.image.load('Icons/Joystick.png')
-
     pygame.display.set_icon(game_icon)
     player_images = player.load_player_images(case_size)
 
 
-# Loop for the game
+# Function to draw the number of lives on the screen
+def draw_lives(screen, lives):
+    font = pygame.font.Font(None, 36)
+    lives_text = font.render(f'Lives: {lives}', True, white)
+    screen.blit(lives_text, (10, 10))  # Position top left
+
+
+# Function to draw the score on the screen
+def draw_score(screen, score):
+    font = pygame.font.Font(None, 36)  # Default font
+    score_text = font.render(f'Score: {score}', True, white)
+    screen.blit(score_text, (650, 850))  # Position it below the lives
+
 def game_loop():
     global tick
 
-    # Initialize player's grid position
     player_grid_x = player.starting_col
     player_grid_y = player.starting_row
-
     current_image_index = 0
     frame_count = 0
     frame_limit = 5
     tick = 0
     last_direction = 'right'
+    pause_duration = 30
+    pause_timer = 0
+    is_paused = False
+    game_over = False
+    score = 0  # Initialize score
 
     ghost_images = load_ghost_images(player.case_size)
-    ghosts = create_ghosts(board, ghost_images)
+    ghosts = create_ghosts(board, ghost_images)  # Initialize ghosts
 
     running = True
     game_music()
@@ -94,12 +103,44 @@ def game_loop():
         # Draw ghosts
         draw_ghosts(screen, ghosts, width, height)
 
-        # Get player movements and direction
-        player_grid_x, player_grid_y, last_direction, moving = player.player_movements(
-            pygame.key.get_pressed(), player_grid_x, player_grid_y, last_direction, frame_count)
+        if game_over:
+            draw_game_over(screen)  # Show game over message
+            music.stop()
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_r]:
+                # Reset game state
+                player.lives = 3
+                player_grid_x = player.starting_col
+                player_grid_y = player.starting_row
+                ghosts = create_ghosts(board, ghost_images)  # Reset ghosts
+                score = 0  # Reset score
+                game_over = False
+                game_music()
+        else:
+            # Get player movements and direction
+            player_grid_x, player_grid_y, last_direction, moving = player.player_movements(
+                pygame.key.get_pressed(), player_grid_x, player_grid_y, last_direction, frame_count)
 
-        # Update the board with the player's grid position
-        player.update_board(board, player_grid_x, player_grid_y)
+            # Handle pause logic
+            if is_paused:
+                pause_timer += 1
+                if pause_timer >= pause_duration:
+                    is_paused = False
+                    pause_timer = 0
+            else:
+                if player.check_collision(player_grid_x * player.case_size, player_grid_y * player.case_size, ghosts):
+                    player.lives -= 1
+                    is_paused = True
+
+                # Check if player has no lives left
+                if player.lives <= 0:
+                    game_over = True
+
+        # Draw the number of lives and score on the screen
+        draw_lives(screen, player.lives)
+        draw_score(screen, score)
+
+        score = player.update_board_coins(board, player_grid_x, player_grid_y, score)
 
         # Update the player's animation based on position
         current_image_index, frame_count = player.player_animation(screen, player_images,
@@ -109,12 +150,6 @@ def game_loop():
         # Update the display
         pygame.display.flip()
 
-
-
-
-
 if __name__ == "__main__":
-    # Main windows settings
     game_settings()
-    # Using the loop for the game
     game_loop()

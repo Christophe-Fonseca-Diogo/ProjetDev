@@ -7,20 +7,18 @@
 
 import pygame
 import random
-
-from board import board  # Assuming you have board.py and this imports the board variable.
+from board import board
 
 
 # Load ghost images into a list
 def load_ghost_images(case_size):
     ghost_images = []
     for ghost_index in range(4):  # Assuming there are 4 ghosts (indices: 6-9)
-        image = pygame.image.load(f'Assets/Ghosts/Ghost{ghost_index + 1}.png')  # Load ghost images (blue, orange, pink, red)
+        image = pygame.image.load(f'Assets/Ghosts/Ghost{ghost_index + 1}.png')
         scaled_image = pygame.transform.scale(image, (case_size, case_size))
         ghost_images.append(scaled_image)
 
     return ghost_images
-
 
 # Function to create a list of ghosts from the board data
 def create_ghosts(board, ghost_images):
@@ -30,6 +28,7 @@ def create_ghosts(board, ghost_images):
             if 6 <= board[row][col] <= 9:  # Check for ghost positions
                 ghosts.append([col, row, ghost_images[board[row][col] - 6]])  # [x, y, image]
     return ghosts
+
 
 
 # Move the ghosts
