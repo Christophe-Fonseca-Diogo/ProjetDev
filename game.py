@@ -10,6 +10,7 @@ from ghosts import *
 from board import draw_board
 from game_over import *
 from game_win import *
+
 music = None
 
 # Music for the game
@@ -20,7 +21,7 @@ def game_music():
     music.set_volume(0.5)
     music.play(loops=-1)  # -1 for infinite loop
 
-
+# Title for the game windows
 def game_title():
     # Title settings
     title_font = pygame.font.Font('Assets/PAC-FONT.TTF', 80)
@@ -28,7 +29,6 @@ def game_title():
     title_text_rect = title_text.get_rect()
     title_text_rect.center = (window_width // 2, window_height // 12)
     screen.blit(title_text, title_text_rect)
-
 
 # Window settings for the game
 def game_settings():
@@ -44,13 +44,11 @@ def game_settings():
     pygame.display.set_icon(game_icon)
     player_images = player.load_player_images(case_size)
 
-
 # Function to draw the number of lives on the screen
 def draw_lives(screen, lives):
     font = pygame.font.Font(None, 36)
     lives_text = font.render(f'Lives: {lives}', True, white)
     screen.blit(lives_text, (10, 825))
-
 
 # Function to draw the score on the screen
 def draw_score(screen, score):
@@ -61,19 +59,23 @@ def draw_score(screen, score):
 def game_loop():
     global tick
 
+    # Variables for the game
     player_grid_x = player.starting_col
     player_grid_y = player.starting_row
+
+    last_direction = 'right'
+
     current_image_index = 0
     frame_count = 0
     frame_limit = 5
     tick = 0
-    last_direction = 'right'
     pause_duration = 30
     pause_timer = 0
+    score = 0
+
     is_paused = False
     game_over = False
-    game_win = False  # New variable for game win
-    score = 0  # Initialize score
+    game_win = False
 
     ghost_images = load_ghost_images(player.case_size)
     ghosts = create_ghosts(board, ghost_images)  # Initialize ghosts
@@ -89,6 +91,7 @@ def game_loop():
         screen.fill(black)
         game_title()
 
+        # Speed for the ghosts
         if tick == 15:
             tick = 0
             move_ghosts(ghosts)
@@ -107,10 +110,11 @@ def game_loop():
         # Check for win condition
         if score >= 12300:
             game_win = True
-            music.stop()  # Stop the game music if the player wins
+            music.stop()
 
+        # Check for loose condition
         if game_over:
-            draw_game_over(screen)  # Show game over message
+            draw_game_over(screen)
             music.stop()
             keys = pygame.key.get_pressed()
             if keys[pygame.K_r]:
@@ -118,20 +122,20 @@ def game_loop():
                 player.lives = 3
                 player_grid_x = player.starting_col
                 player_grid_y = player.starting_row
-                ghosts = create_ghosts(board, ghost_images)  # Reset ghosts
-                score = 0  # Reset score
+                ghosts = create_ghosts(board, ghost_images)
                 game_over = False
                 game_music()
 
-        elif game_win:  # Check if the player has won
-            draw_game_win(screen)  # Show game win message
+        # Check if the player has won
+        elif game_win:
+            draw_game_win(screen)
 
         else:
             # Get player movements and direction
             player_grid_x, player_grid_y, last_direction, moving = player.player_movements(
                 pygame.key.get_pressed(), player_grid_x, player_grid_y, last_direction, frame_count)
 
-            # Handle pause logic
+            # Handle pause logic for not loosing lives in 1 s
             if is_paused:
                 pause_timer += 1
                 if pause_timer >= pause_duration:
@@ -159,11 +163,6 @@ def game_loop():
 
         # Update the display
         pygame.display.flip()
-
-if __name__ == "__main__":
-    game_settings()
-    game_loop()
-
 
 if __name__ == "__main__":
     game_settings()
