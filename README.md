@@ -26,7 +26,7 @@ Il conviendra cependant d'installer le package `mysql-connector-python` pour l'i
  
 The goal is to recreate the PAC-MAN game.  
 This development will take place during my CFC IT diploma.  
-Version: 0.5\
+Version: 1\
 08/20/2024: Repository opening
  
 ### How to configure my machine for the game to work? ###
