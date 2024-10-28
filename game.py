@@ -9,7 +9,7 @@ import player
 from ghosts import *
 from board import draw_board
 from game_over import *
-
+from game_win import *
 music = None
 
 # Music for the game
@@ -72,6 +72,7 @@ def game_loop():
     pause_timer = 0
     is_paused = False
     game_over = False
+    game_win = False  # New variable for game win
     score = 0  # Initialize score
 
     ghost_images = load_ghost_images(player.case_size)
@@ -103,6 +104,11 @@ def game_loop():
         # Draw ghosts
         draw_ghosts(screen, ghosts, width, height)
 
+        # Check for win condition
+        if score >= 12300:
+            game_win = True
+            music.stop()  # Stop the game music if the player wins
+
         if game_over:
             draw_game_over(screen)  # Show game over message
             music.stop()
@@ -116,6 +122,10 @@ def game_loop():
                 score = 0  # Reset score
                 game_over = False
                 game_music()
+
+        elif game_win:  # Check if the player has won
+            draw_game_win(screen)  # Show game win message
+
         else:
             # Get player movements and direction
             player_grid_x, player_grid_y, last_direction, moving = player.player_movements(
@@ -149,6 +159,11 @@ def game_loop():
 
         # Update the display
         pygame.display.flip()
+
+if __name__ == "__main__":
+    game_settings()
+    game_loop()
+
 
 if __name__ == "__main__":
     game_settings()
