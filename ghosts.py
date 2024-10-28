@@ -1,6 +1,6 @@
 ###
 # This file is for all the settings of the ghosts
-# Last Edited : 26.09.2024
+# Last Edited : 28.10.2024
 # Made by Christophe & Zachary
 # SI-C3A
 ###
@@ -8,7 +8,6 @@
 import pygame
 import random
 from board import board
-
 
 # Load ghost images into a list
 def load_ghost_images(case_size):
@@ -29,8 +28,6 @@ def create_ghosts(board, ghost_images):
                 ghosts.append([col, row, ghost_images[board[row][col] - 6]])  # [x, y, image]
     return ghosts
 
-
-
 # Move the ghosts
 def move_ghosts(ghosts):
     for ghost in ghosts:
@@ -42,7 +39,6 @@ def move_ghosts(ghosts):
         if 0 <= new_x < len(board[0]) and 0 <= new_y < len(board):
             if board[new_y][new_x] != 1:  # Not a wall
                 ghost[0], ghost[1] = new_x, new_y  # Update position
-
 
 # Draw the ghosts at their current positions
 def draw_ghosts(screen, ghosts, offset_x, offset_y):
