@@ -28,7 +28,7 @@ def create_ghosts(board, ghost_images):
                 ghosts.append([col, row, ghost_images[board[row][col] - 6]])  # [x, y, image]
     return ghosts
 
-# Move the ghosts
+# Move the ghosts randomly
 def move_ghosts(ghosts):
     for ghost in ghosts:
         direction = random.choice([(0, -1), (0, 1), (-1, 0), (1, 0)])  # Down, Up, Left, Right
