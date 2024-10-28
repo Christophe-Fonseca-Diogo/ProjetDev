@@ -13,9 +13,9 @@ game_over_sound_played = False
 # Function for the game over sound
 def game_over_sound():
     pygame.mixer.init()
-    coin_pickup_sound = pygame.mixer.Sound("Assets/Sounds/game_over_sound.mp3")
-    coin_pickup_sound.set_volume(0.8)
-    coin_pickup_sound.play()
+    game_over_sound = pygame.mixer.Sound("Assets/Sounds/game_over_sound.mp3")
+    game_over_sound.set_volume(0.8)
+    game_over_sound.play()
 
 # Function to display game over
 def draw_game_over(screen):
