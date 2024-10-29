@@ -1,6 +1,6 @@
 ###
 # This file is for all the settings of the player
-# Last Edited : 27.10.2024
+# Last Edited : 29.10.2024
 # Made by Christophe & Zachary
 # SI-C3A
 ###

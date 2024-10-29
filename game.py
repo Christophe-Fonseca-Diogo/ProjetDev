@@ -1,5 +1,6 @@
+###
 # This file is for the game
-# Last Edited : 28.10.2024
+# Last Edited : 29.10.2024
 # Made by Christophe & Zachary
 # SI-C3A
 ###
@@ -73,6 +74,7 @@ def game_loop():
     pause_timer = 0
     score = 0
 
+    # status
     is_paused = False
     game_over = False
     game_win = False
@@ -135,7 +137,7 @@ def game_loop():
             player_grid_x, player_grid_y, last_direction, moving = player.player_movements(
                 pygame.key.get_pressed(), player_grid_x, player_grid_y, last_direction, frame_count)
 
-            # Handle pause logic for not loosing lives in 1 s
+            # Handle pause logic for not loosing lives too fast
             if is_paused:
                 pause_timer += 1
                 if pause_timer >= pause_duration:

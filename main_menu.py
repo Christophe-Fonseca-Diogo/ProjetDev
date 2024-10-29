@@ -1,6 +1,6 @@
 ###
 # This file is for the Main Menu of our game : Pac-Man
-# Last Edited : 26.09.2024
+# Last Edited : 29.10.2024
 # Made by Christophe & Zachary
 # SI-C3A
 ###
@@ -17,7 +17,6 @@ def menu_music():
     music = pygame.mixer.Sound("Assets/Sounds/Menu.mp3")
     # -1 for infinite loop
     music.play(loops=-1)
-
 
 # Settings for the window
 def main_settings():
@@ -39,7 +38,6 @@ def main_settings():
 
     pygame.display.set_icon(game_icon)
     pygame.display.update()
-
 
 # Main Text for the title
 def texts_main_menu():
@@ -67,7 +65,6 @@ def texts_main_menu():
 
     pygame.display.update()
 
-
 # Button settings for starting the game
 def button_play():
 
@@ -83,7 +80,6 @@ def button_play():
     screen.blit(button_play_text, button_play_rect)
     # Event handling
     return button_play_rect
-
 
 # Button settings for leaving the game
 def button_exit():
@@ -101,7 +97,6 @@ def button_exit():
     # Event handling
     return button_exit_rect
 
-
 # Button settings for leaving the game
 def button_scoreboard():
 
@@ -117,7 +112,6 @@ def button_scoreboard():
     screen.blit(button_scoreboard_text, button_scoreboard_rect)
     # Event handling
     return button_scoreboard_rect
-
 
 # Main loop for the menu
 def main_loop():
@@ -167,7 +161,6 @@ def main_loop():
 
         # Update the screen
         pygame.display.update()
-
 
 if __name__ == "__main__":
     # Main windows settings
